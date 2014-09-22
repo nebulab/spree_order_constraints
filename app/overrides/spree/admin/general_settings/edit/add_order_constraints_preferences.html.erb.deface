@@ -1,0 +1,22 @@
+<!-- insert_after '#preferences .row' -->
+
+<div class="row">
+  <div class="alpha six columns">
+    <fieldset class="order-constraints no-border-bottom">
+      <legend align="center"><%= Spree.t(:order_constraints_settings)%></legend>
+      <% @preferences_order_constraints.each do |key|
+          type = Spree::Config.preference_type(key) %>
+          <div class="field">
+            <% if key =~ /date/ %>
+              <%= label_tag(key, Spree.t(key)) + tag(:br) %>
+              <%= text_field_tag key, nil, class: 'datepicker', value: datepicker_field_value(Spree::Config.send(key)) %>
+            <% else %>
+              <%= label_tag(key, Spree.t(key)) + tag(:br) if type != :boolean %>
+              <%= preference_field_tag(key, Spree::Config[key], type: type) %>
+              <%= label_tag(key, Spree.t(key)) + tag(:br) if type == :boolean %>
+            <% end %>
+          </div>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

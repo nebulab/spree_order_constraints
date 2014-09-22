@@ -1,5 +1,6 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  spree:
+    order_constraints_settings: "Order Constraints Settings"
+    order_start_date_constraint: "Order constraint start date"
+    order_end_date_constraint: "Order constraint end date"
+

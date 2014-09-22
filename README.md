@@ -6,17 +6,17 @@ Introduction goes here.
 Installation
 ------------
 
-Add spree_order_constrains to your Gemfile:
+Add spree_order_constraints to your Gemfile:
 
 ```ruby
-gem 'spree_order_constrains'
+gem 'spree_order_constraints'
 ```
 
 Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
-bundle exec rails g spree_order_constrains:install
+bundle exec rails g spree_order_constraints:install
 ```
 
 Testing
@@ -33,7 +33,7 @@ When testing your applications integration with this extension you may use it's 
 Simply add this require statement to your spec_helper:
 
 ```ruby
-require 'spree_order_constrains/factories'
+require 'spree_order_constraints/factories'
 ```
 
 Copyright (c) 2014 [name of extension creator], released under the New BSD License

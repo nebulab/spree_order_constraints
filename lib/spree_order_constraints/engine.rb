@@ -2,7 +2,7 @@ module SpreeOrderConstrains
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
-    engine_name 'spree_order_constrains'
+    engine_name 'spree_order_constraints'
 
     # use rspec for tests
     config.generators do |g|

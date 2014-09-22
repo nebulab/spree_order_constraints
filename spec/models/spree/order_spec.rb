@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module Spree
   describe Order do
-    describe '#checkout_allowed?' do
-      let(:prefs) { Spree::Config }
+    let(:prefs) { Spree::Config }
 
+    describe '#checkout_allowed?' do
       before(:each) do
         Rails.cache.clear
         prefs.order_start_date_constraint = nil
@@ -34,21 +34,24 @@ module Spree
         end
 
         context 'when start and end date constraints are set' do
+          let(:two_days_ago) { 2.days.ago }
+          let(:two_days_from_now) { 2.days.from_now }
+
           before do
-            prefs.order_start_date_constraint = Time.local(2014, 1, 1)
-            prefs.order_end_date_constraint = Time.local(2014, 1, 7)
+            prefs.order_start_date_constraint = two_days_ago
+            prefs.order_end_date_constraint = two_days_from_now
           end
 
           context 'and today is in range' do
             it 'returns true' do
-              Timecop.freeze(Time.local(2014, 1, 3))
+              Timecop.freeze(Time.now)
               expect(order.checkout_allowed?).to be true
             end
           end
 
           context 'and today is not in range' do
             it 'returns false' do
-              Timecop.freeze(Time.local(2014, 1, 10))
+              Timecop.freeze(3.days.from_now)
               expect(order.checkout_allowed?).to be false
             end
           end

@@ -43,15 +43,17 @@ module Spree
           end
 
           context 'and today is in range' do
+            before { Timecop.freeze }
+
             it 'returns true' do
-              Timecop.freeze(Time.now)
               expect(order.checkout_allowed?).to be true
             end
           end
 
           context 'and today is not in range' do
+            before { Timecop.freeze(3.days.from_now) }
+
             it 'returns false' do
-              Timecop.freeze(3.days.from_now)
               expect(order.checkout_allowed?).to be false
             end
           end

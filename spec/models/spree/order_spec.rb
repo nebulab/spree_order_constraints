@@ -3,7 +3,7 @@ require 'spec_helper'
 module Spree
   describe Order do
     describe '#checkout_allowed?' do
-      let(:prefs) { Rails.application.config.spree.preferences }
+      let(:prefs) { Spree::Config }
 
       before(:each) do
         Rails.cache.clear

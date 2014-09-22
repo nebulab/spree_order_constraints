@@ -8,11 +8,11 @@ Spree::AppConfiguration.class_eval do
   end
 
   def order_start_date_constraint
-    get(:order_start_date_constraint).to_time
+    get(:order_start_date_constraint).try(:to_time)
   end
 
   def order_end_date_constraint
-    get(:order_end_date_constraint).to_time
+    get(:order_end_date_constraint).try(:to_time)
   end
 
   def order_constraint_range

@@ -19,7 +19,7 @@ module Spree
         end
       end
 
-      context 'when order have line items' do
+      context 'when order has line items' do
         let(:order) { create(:order_with_line_items) }
 
         it 'returns true' do

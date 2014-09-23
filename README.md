@@ -1,7 +1,8 @@
-SpreeOrderConstrains
-====================
+SpreeOrderConstraints
+=====================
 
-Introduction goes here.
+This extension is a simple way to change the behaviour of `checkout_allowed?` to
+add some constraints to your customers as they proceed to checkout.
 
 Installation
 ------------
@@ -36,4 +37,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_order_constraints/factories'
 ```
 
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 Nebulab, released under the New BSD License

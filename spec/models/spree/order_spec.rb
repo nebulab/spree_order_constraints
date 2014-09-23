@@ -70,6 +70,9 @@ module Spree
             end
           end
         end
+
+        context 'when an item limit is set' do
+        end
       end
     end
   end

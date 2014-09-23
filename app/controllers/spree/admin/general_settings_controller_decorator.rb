@@ -4,7 +4,7 @@ Spree::Admin::GeneralSettingsController.class_eval do
   private
 
   def load_order_constraints_preferences
-    @preferences_order_constraints = [:order_start_date_constraint,
-      :order_end_date_constraint]
+    @preferences_order_constraints = [:checkout_allowed_from,
+      :checkout_allowed_until]
   end
 end

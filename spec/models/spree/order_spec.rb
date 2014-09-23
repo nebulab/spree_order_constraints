@@ -2,13 +2,28 @@ require 'spec_helper'
 
 module Spree
   describe Order do
-    let(:prefs) { Spree::Config }
+    describe '.checkout_allowed_from' do
+      it 'returns a datetime' do
+        today = Time.now
+        Spree::Config.checkout_allowed_from = today
+
+        expect(Spree::Order.checkout_allowed_from).to eq_to_time today
+      end
+    end
+
+    describe '#checkout_allowed_until' do
+      it 'returns a datetime' do
+        today = Time.now
+        Spree::Config.checkout_allowed_until = today
+
+        expect(Spree::Order.checkout_allowed_until).to eq_to_time today
+      end
+    end
 
     describe '#checkout_allowed?' do
       before(:each) do
-        Rails.cache.clear
-        prefs.order_start_date_constraint = nil
-        prefs.order_end_date_constraint = nil
+        Spree::Config.checkout_allowed_from = nil
+        Spree::Config.checkout_allowed_until = nil
       end
 
       context 'when order does not have line items' do
@@ -34,12 +49,9 @@ module Spree
         end
 
         context 'when start and end date constraints are set' do
-          let(:two_days_ago) { 2.days.ago }
-          let(:two_days_from_now) { 2.days.from_now }
-
           before do
-            prefs.order_start_date_constraint = two_days_ago
-            prefs.order_end_date_constraint = two_days_from_now
+            Spree::Config.checkout_allowed_from = 2.days.ago
+            Spree::Config.checkout_allowed_until = 2.days.from_now
           end
 
           context 'and today is in range' do

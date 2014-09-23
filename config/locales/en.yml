@@ -1,6 +1,6 @@
 en:
   spree:
     order_constraints_settings: "Order Constraints Settings"
-    order_start_date_constraint: "Order constraint start date"
-    order_end_date_constraint: "Order constraint end date"
+    checkout_allowed_from: "Checkout allowed from"
+    checkout_allowed_until: "Checkout allowed until"
 

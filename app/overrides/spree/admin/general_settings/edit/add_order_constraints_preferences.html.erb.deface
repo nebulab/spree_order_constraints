@@ -9,7 +9,7 @@
           <div class="field">
             <% if key == :checkout_allowed_from || key == :checkout_allowed_until %>
               <%= label_tag(key, Spree.t(key)) + tag(:br) %>
-              <%= text_field_tag key, nil, class: 'datepicker', value: datepicker_field_value(Spree::Config.send(key)) %>
+              <%= text_field_tag key, nil, class: 'datepicker', value: Spree::Config.send(key) %>
             <% else %>
               <%= label_tag(key, Spree.t(key)) + tag(:br) if type != :boolean %>
               <%= preference_field_tag(key, Spree::Config[key], type: type) %>

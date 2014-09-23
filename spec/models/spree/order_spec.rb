@@ -11,7 +11,7 @@ module Spree
       end
     end
 
-    describe '#checkout_allowed_until' do
+    describe '.checkout_allowed_until' do
       it 'returns a datetime' do
         today = Time.now
         Spree::Config.checkout_allowed_until = today

@@ -7,7 +7,7 @@
       <% @preferences_order_constraints.each do |key|
           type = Spree::Config.preference_type(key) %>
           <div class="field">
-            <% if key =~ /date/ %>
+            <% if key == :checkout_allowed_from || key == :checkout_allowed_until %>
               <%= label_tag(key, Spree.t(key)) + tag(:br) %>
               <%= text_field_tag key, nil, class: 'datepicker', value: datepicker_field_value(Spree::Config.send(key)) %>
             <% else %>

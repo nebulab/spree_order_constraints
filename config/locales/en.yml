@@ -3,4 +3,5 @@ en:
     order_constraints_settings: "Order Constraints Settings"
     checkout_allowed_from: "Checkout allowed from"
     checkout_allowed_until: "Checkout allowed until"
+    maximum_items_per_month: "Maximum items bought per month"
 

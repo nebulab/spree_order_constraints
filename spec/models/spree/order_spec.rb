@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module Spree
   describe Order do
+    before { reset_spree_preferences }
+
     describe '.checkout_allowed_from' do
       it 'returns a datetime' do
         today = Time.now
@@ -71,7 +73,29 @@ module Spree
           end
         end
 
-        context 'when an item limit is set' do
+        context 'when a line item limit is set' do
+          let(:customer) { create(:user) }
+          let(:this_month) { DateTime.now.beginning_of_month + 5.days }
+          let!(:new_order) { create(:order_with_line_items, line_items_count: 2, user: customer) }
+          let!(:old_order) { create(:completed_order_with_totals, line_items_count: 1, user: customer) }
+
+          before { old_order.update_column(:completed_at, this_month) }
+
+          context 'and that limit is not yet reached' do
+            it 'returns true' do
+              Spree::Config.maximum_items_per_month = 3
+
+              expect(new_order.checkout_allowed?).to be true
+            end
+          end
+
+          context 'and that limit is reached' do
+            it 'returns false' do
+              Spree::Config.maximum_items_per_month = 2
+
+              expect(new_order.checkout_allowed?).to be false
+            end
+          end
         end
       end
     end

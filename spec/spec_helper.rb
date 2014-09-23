@@ -30,6 +30,7 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/preferences'
 
 # Requires factories defined in lib/spree_order_constraints/factories.rb
 require 'spree_order_constraints/factories'
@@ -47,6 +48,10 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+
+  # == Preferences Helpers
+  #
+  config.include Spree::TestingSupport::Preferences
 
   # == Mock Framework
   #

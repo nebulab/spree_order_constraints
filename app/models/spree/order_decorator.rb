@@ -8,20 +8,42 @@ Spree::Order.class_eval do
   end
 
   def checkout_allowed?
-    has_line_items? && Spree::Order.checkout_allowed_now?
+    has_line_items? &&
+    Spree::Order.checkout_allowed_now? &&
+    items_constraint_respected?
   end
 
   private
-
-  def self.checkout_allowed_now?
-    allowed_datetime_range.cover?(DateTime.now)
-  end
 
   def self.allowed_datetime_range
     checkout_allowed_from..checkout_allowed_until
   end
 
+  def self.checkout_allowed_now?
+    allowed_datetime_range.cover?(DateTime.now)
+  end
+
+  def self.completed_this_month_by_customer(customer_email)
+    this_month = [DateTime.now.beginning_of_month, DateTime.now.end_of_month]
+
+    by_customer(customer_email).completed_between(*this_month)
+  end
+
   def has_line_items?
     line_items.count > 0
+  end
+
+  def items_constraint_respected?
+    Spree::Config.maximum_items_per_month.nil? ||
+    items_for_customer_this_month <= Spree::Config.maximum_items_per_month
+  end
+
+  def items_for_customer_this_month
+    items_to_buy         = line_items.sum(:quantity)
+    items_already_bought = Spree::Order.completed_this_month_by_customer(email).
+                            joins(:line_items).
+                            sum(:quantity)
+
+    items_to_buy + items_already_bought
   end
 end

@@ -1,4 +1,4 @@
-module SpreeOrderConstrains
+module SpreeOrderConstraints
   module Generators
     class InstallGenerator < Rails::Generators::Base
 

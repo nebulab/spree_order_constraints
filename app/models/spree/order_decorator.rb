@@ -34,8 +34,8 @@ Spree::Order.class_eval do
   end
 
   def items_constraint_respected?
-    Spree::Config.maximum_items_per_month.nil? ||
-    items_for_customer_this_month <= Spree::Config.maximum_items_per_month
+    maximum_items_per_month.nil? ||
+    items_for_customer_this_month <= maximum_items_per_month
   end
 
   def items_for_customer_this_month
@@ -45,5 +45,10 @@ Spree::Order.class_eval do
                             sum(:quantity)
 
     items_to_buy + items_already_bought
+  end
+
+  def maximum_items_per_month
+    user.spree_roles.map(&:preferred_maximum_items_per_month).max ||
+    Spree::Config.maximum_items_per_month
   end
 end

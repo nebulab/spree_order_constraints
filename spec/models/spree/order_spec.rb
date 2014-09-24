@@ -74,28 +74,57 @@ module Spree
         end
 
         context 'when a line item limit is set' do
-          let(:customer) { create(:user) }
           let(:this_month) { DateTime.now.beginning_of_month + 5.days }
           let!(:new_order) { create(:order_with_line_items, line_items_count: 2, user: customer) }
           let!(:old_order) { create(:completed_order_with_totals, line_items_count: 1, user: customer) }
 
           before { old_order.update_column(:completed_at, this_month) }
 
-          context 'and that limit is not yet reached' do
-            it 'returns true' do
-              Spree::Config.maximum_items_per_month = 3
+          context 'as a global preference' do
+            let(:customer) { create(:user) }
 
-              expect(new_order.checkout_allowed?).to be true
+            context 'and that limit is not yet reached' do
+              it 'returns true' do
+                Spree::Config.maximum_items_per_month = 3
+
+                expect(new_order.checkout_allowed?).to be true
+              end
+            end
+
+            context 'and that limit is reached' do
+              it 'returns false' do
+                Spree::Config.maximum_items_per_month = 2
+
+                expect(new_order.checkout_allowed?).to be false
+              end
             end
           end
 
-          context 'and that limit is reached' do
-            it 'returns false' do
-              Spree::Config.maximum_items_per_month = 2
+          context 'as a preference on Spree::Role' do
+            let(:customer) { create(:admin_user) }
+            let(:customer_role) { customer.spree_roles.first }
 
-              expect(new_order.checkout_allowed?).to be false
+            context 'and that limit is not yet reached' do
+              it 'returns true' do
+                Spree::Config.maximum_items_per_month = 1
+                customer_role.set_preference(:maximum_items_per_month, 3)
+                customer_role.save
+
+                expect(new_order.checkout_allowed?).to be true
+              end
+            end
+
+            context 'and that limit is reached' do
+              it 'returns false' do
+                Spree::Config.maximum_items_per_month = 4
+                customer_role.set_preference(:maximum_items_per_month, 2)
+                customer_role.save
+
+                expect(new_order.checkout_allowed?).to be false
+              end
             end
           end
+
         end
       end
     end

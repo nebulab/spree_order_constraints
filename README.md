@@ -4,6 +4,8 @@ SpreeOrderConstraints
 This extension is a simple way to change the behaviour of `checkout_allowed?` to
 add some constraints to your customers as they proceed to checkout.
 
+[![Coverage Status](https://coveralls.io/repos/nebulab/spree_order_constraints/badge.png)](https://coveralls.io/r/nebulab/spree_order_constraints)
+
 Installation
 ------------
 

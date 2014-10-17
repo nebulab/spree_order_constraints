@@ -21,7 +21,7 @@ Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
-bundle exec rails g spree_order_constraints:install
+./bin/rails g spree_order_constraints:install
 ```
 
 Testing

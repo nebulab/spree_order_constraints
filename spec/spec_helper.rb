@@ -1,5 +1,7 @@
 # Run Coverage report
 require 'simplecov'
+require 'coveralls'
+
 SimpleCov.start do
   add_filter 'spec/dummy'
   add_group 'Controllers', 'app/controllers'
@@ -9,6 +11,9 @@ SimpleCov.start do
   add_group 'Views', 'app/views'
   add_group 'Libraries', 'lib'
 end
+
+# Code coverage
+Coveralls.wear!
 
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'

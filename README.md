@@ -1,6 +1,7 @@
 SpreeOrderConstraints
 =====================
 
+[ ![Codeship Status for nebulab/spree_order_constraints](https://www.codeship.io/projects/4b3ce540-3827-0132-52b6-0a8934957454/status)](https://www.codeship.io/projects/41915)
 [![Coverage Status](https://coveralls.io/repos/nebulab/spree_order_constraints/badge.png)](https://coveralls.io/r/nebulab/spree_order_constraints)
 [![Code Climate](https://codeclimate.com/github/nebulab/spree_order_constraints/badges/gpa.svg)](https://codeclimate.com/github/nebulab/spree_order_constraints)
 

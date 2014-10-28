@@ -7,6 +7,11 @@ Spree::Order.class_eval do
     Spree::Config.checkout_allowed_until.try(:to_datetime) || DateTime::Infinity.new
   end
 
+  def maximum_items_per_month
+    user.spree_roles.map(&:preferred_maximum_items_per_month).max ||
+    Spree::Config.maximum_items_per_month
+  end
+
   def checkout_allowed?
     has_line_items? &&
     Spree::Order.checkout_allowed_now? &&
@@ -45,10 +50,5 @@ Spree::Order.class_eval do
                             sum(:quantity)
 
     items_to_buy + items_already_bought
-  end
-
-  def maximum_items_per_month
-    user.spree_roles.map(&:preferred_maximum_items_per_month).max ||
-    Spree::Config.maximum_items_per_month
   end
 end

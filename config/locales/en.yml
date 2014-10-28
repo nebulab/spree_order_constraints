@@ -4,4 +4,5 @@ en:
     checkout_allowed_from: "Checkout allowed from"
     checkout_allowed_until: "Checkout allowed until"
     maximum_items_per_month: "Maximum items bought per month"
+    order_constraints_error: "Employee orders can only be placed from %{from} to %{to} and can't exceed %{maximum_items} per month."
 

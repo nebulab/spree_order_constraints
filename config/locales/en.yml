@@ -4,5 +4,5 @@ en:
     checkout_allowed_from: "Checkout allowed from"
     checkout_allowed_until: "Checkout allowed until"
     maximum_items_per_month: "Maximum items bought per month"
-    order_constraints_error: "Your order is limited to a quantity of {maximum_items} this month, and can only be placed from {from} till midnight of {to}."
+    order_constraints_error: "Your order is limited to a quantity of %{maximum_items} this month, and can only be placed from %{from} till midnight of %{to}."
 

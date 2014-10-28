@@ -3,16 +3,19 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_order_constraints'
   s.version     = '2.3.2'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Add constraints to your customers as they proceed to checkout'
+  s.description = """
+    This extension is a simple way to change the behaviour of `checkout_allowed?`
+    to add some constraints to your customers as they proceed to checkout.
+  """
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'NebuLab'
+  s.email     = 'info@nebulab.it'
+  s.homepage  = 'https://github.com/nebulab/spree_order_constraints'
 
-  #s.files       = `git ls-files`.split("\n")
-  #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.files       = `git ls-files`.split("\n")
+  s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 

@@ -31,7 +31,7 @@ Spree::Order.class_eval do
   def self.completed_this_month_by_customer(customer_email)
     this_month = [DateTime.now.beginning_of_month, DateTime.now.end_of_month]
 
-    by_customer(customer_email).completed_between(*this_month)
+    by_customer(customer_email).by_state(:complete).completed_between(*this_month)
   end
 
   def has_line_items?

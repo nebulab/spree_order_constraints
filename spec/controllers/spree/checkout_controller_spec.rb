@@ -26,8 +26,8 @@ describe Spree::CheckoutController, :type => :controller do
       it 'sets flash error message' do
         expect(flash[:error]).to eq(
           Spree.t(:order_constraints_error,
-                  from: I18n.l(Spree::Order.checkout_allowed_from, format: :short),
-                  to: I18n.l(Spree::Order.checkout_allowed_until, format: :short),
+                  from: I18n.l(Spree::Order.checkout_allowed_from.to_date, format: :short),
+                  to: I18n.l(Spree::Order.checkout_allowed_until.to_date, format: :short),
                   maximum_items: Spree::Config.maximum_items_per_month)
         )
       end

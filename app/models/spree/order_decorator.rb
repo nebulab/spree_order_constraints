@@ -12,11 +12,14 @@ Spree::Order.class_eval do
     Spree::Config.maximum_items_per_month
   end
 
-  def checkout_allowed?
-    has_line_items? &&
-    Spree::Order.checkout_allowed_now? &&
-    items_constraint_respected?
+  module OverrideCheckoutAllowed
+    def checkout_allowed?
+      super &&
+      Spree::Order.checkout_allowed_now? &&
+      items_constraint_respected?
+    end
   end
+  prepend OverrideCheckoutAllowed
 
   private
 
@@ -32,10 +35,6 @@ Spree::Order.class_eval do
     this_month = [DateTime.now.beginning_of_month, DateTime.now.end_of_month]
 
     by_customer(customer_email).by_state(:complete).completed_between(*this_month)
-  end
-
-  def has_line_items?
-    line_items.count > 0
   end
 
   def items_constraint_respected?

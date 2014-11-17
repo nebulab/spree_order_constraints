@@ -1,10 +1,10 @@
 Spree::Order.class_eval do
   def self.checkout_allowed_from
-    Spree::Config.checkout_allowed_from.try(:to_datetime) || DateTime.new
+    Spree::Config.checkout_allowed_from.try(:to_datetime).try(:beginning_of_day) || DateTime.new
   end
 
   def self.checkout_allowed_until
-    Spree::Config.checkout_allowed_until.try(:to_datetime) || DateTime::Infinity.new
+    Spree::Config.checkout_allowed_until.try(:to_datetime).try(:end_of_day) || DateTime::Infinity.new
   end
 
   def maximum_items_per_month

@@ -9,7 +9,7 @@ module Spree
         today = Time.now
         Spree::Config.checkout_allowed_from = today
 
-        expect(Spree::Order.checkout_allowed_from).to eq_to_time today
+        expect(Spree::Order.checkout_allowed_from).to eq_to_time today.beginning_of_day
       end
     end
 
@@ -18,7 +18,7 @@ module Spree
         today = Time.now
         Spree::Config.checkout_allowed_until = today
 
-        expect(Spree::Order.checkout_allowed_until).to eq_to_time today
+        expect(Spree::Order.checkout_allowed_until).to eq_to_time today.end_of_day
       end
     end
 

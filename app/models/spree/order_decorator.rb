@@ -1,4 +1,14 @@
 Spree::Order.class_eval do
+  # FIX: taken from the old spree 2.4 branch. they were removed from spree 3.0
+  def self.by_customer(customer)
+    joins(:user).where("#{Spree.user_class.table_name}.email" => customer)
+  end
+
+  def self.by_state(state)
+    where(state: state)
+  end
+  # /FIX
+
   def self.checkout_allowed_from
     Spree::Config.checkout_allowed_from.try(:to_datetime).try(:beginning_of_day) || DateTime.new
   end

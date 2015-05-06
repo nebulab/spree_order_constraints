@@ -1,12 +1,17 @@
-<!-- insert_after '#preferences .row' -->
+<!-- insert_before '#preferences > fieldset > .form-actions' -->
 
 <div class="row">
-  <div class="alpha six columns">
-    <fieldset class="order-constraints no-border-bottom">
-      <legend align="center"><%= Spree.t(:order_constraints_settings)%></legend>
-      <% @preferences_order_constraints.each do |key|
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title"><%= Spree.t(:order_constraints_settings)%></h1>
+      </div>
+
+      <div class="panel-body">
+        <% @preferences_order_constraints.each do |key|
           type = Spree::Config.preference_type(key) %>
-          <div class="field">
+
+          <div class="form-group" data-hook="admin_general_setting_input_name">
             <% if key == :checkout_allowed_from || key == :checkout_allowed_until %>
               <%= label_tag(key, Spree.t(key)) + tag(:br) %>
               <%= text_field_tag key, nil, class: 'datepicker', value: Spree::Config.send(key) %>
@@ -16,7 +21,8 @@
               <%= label_tag(key, Spree.t(key)) + tag(:br) if type == :boolean %>
             <% end %>
           </div>
-      <% end %>
-    </fieldset>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

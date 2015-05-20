@@ -10,16 +10,25 @@ Spree::Order.class_eval do
   # /FIX
 
   def self.checkout_allowed_from
-    Spree::Config.checkout_allowed_from.try(:to_datetime).try(:beginning_of_day) || DateTime.new
+    if Spree::Config.checkout_allowed_from.nil?
+      today = Date.today
+      return DateTime.new(today.year, today.month)
+    end
+    Spree::Config.checkout_allowed_from.try(:to_datetime).try(:beginning_of_day)
   end
 
   def self.checkout_allowed_until
-    Spree::Config.checkout_allowed_until.try(:to_datetime).try(:end_of_day) || DateTime::Infinity.new
+    if Spree::Config.checkout_allowed_until.nil?
+      today = Date.today
+      return DateTime.new(today.year, today.month).end_of_month
+    end
+    Spree::Config.checkout_allowed_until.try(:to_datetime).try(:end_of_day)
   end
 
   def maximum_items_per_month
     user.spree_roles.map(&:preferred_maximum_items_per_month).max ||
-    Spree::Config.maximum_items_per_month
+    Spree::Config.maximum_items_per_month ||
+    1
   end
 
   module OverrideCheckoutAllowed

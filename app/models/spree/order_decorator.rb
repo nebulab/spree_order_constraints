@@ -10,7 +10,7 @@ Spree::Order.class_eval do
   # /FIX
 
   def self.checkout_allowed_from
-    if Spree::Config.checkout_allowed_from.nil?
+    if Spree::Config.checkout_allowed_from.blank?
       today = Date.today
       return DateTime.new(today.year, today.month)
     end
@@ -18,7 +18,7 @@ Spree::Order.class_eval do
   end
 
   def self.checkout_allowed_until
-    if Spree::Config.checkout_allowed_until.nil?
+    if Spree::Config.checkout_allowed_until.blank?
       today = Date.today
       return DateTime.new(today.year, today.month).end_of_month
     end
